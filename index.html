@@ -548,55 +548,14 @@
 
       
         
-          
-            <p>简介：FireKylin是一个nodejs的博客系统</p>
-<p>1.运行一个空的Ubuntu容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    docker run -it -p 80:8360 --name=web_node_firekylin ubuntu bash</div><div class="line">```  </div><div class="line"></div><div class="line">&lt;!-- more --&gt;</div><div class="line"></div><div class="line">2.安装nodejs 和 npm</div></pre></td></tr></table></figure></p>
-<pre><code>先更新一下软件仓库列表  
-     apt-get update
-安装nodejs和npm
-    apt-get install -y nodejs
-    apt-get install -y npm
-验证安装是否成功：
-    查看安装的nodejs版本
-        nodejs -v
-    查看安装的npm版本
-            npm -v 
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  为了兼容以前的老版本建议安装这个</div><div class="line">  apt-get install nodejs-legacy</div><div class="line"></div><div class="line">4.下载网站源码文件</div></pre></td></tr></table></figure>
-<pre><code>创建一个目录作为我们的站点目录
-    cd home &amp;&amp; mkdir myblog &amp;&amp; cd myblog 
-安装wget用于下载文件    
-    apt-get install -y wget
-    wget -c http://firekylin.org/release/firekylin_0.12.6.tar.gz
-把文件解压
-    tar  -zxvf  firekylin_0.12.6.tar.gz 
-进入解压后的文件夹,安装node依赖
-    cd /home/myblog/firekylin &amp;&amp; npm install
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">7.服务器环境推荐pm2启动</div></pre></td></tr></table></figure>
-<pre><code>安装vim用于修改配置文件  
-    apt-get install -y vim-gtk
-安装pm2  
-    npm install -g pm2
-将pm2_default.json配置文件的名称修改为pm2.json  
-    mv pm2_default.json pm2.json
-修改pm2.json配置，将cwd修改为当前目录  
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">  ![alt](http://www.tfgzs.net/static/upload/201608/1890E7I2lJH5kMSEulLHqxGr.png)   </div><div class="line">8.因为我们的网站运行在docker容器里面需要端口映射，而firekylin默认不让通过ip:端口号的形式访问，所以这里需要解除限制，参考：https://thinkjs.org/zh-cn/doc/2.1/force_proxy.html</div></pre></td></tr></table></figure>
-<pre><code>在配置文件 src/common/config/hook.js，添加如下的配置：
-    export default {
-      request_begin: [&quot;prepend&quot;, &quot;force_proxy&quot;]
-}
-修改配置 src/common/config/config.js 中的host为0.0.0.0
-    export default {
-       host: &quot;0.0.0.0&quot;
-    }
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">9，启动项目</div></pre></td></tr></table></figure>
-<pre><code>pm2 start pm2.json
-</code></pre><p>```</p>
-<p>docker容器内部访问 <a href="http://127.0.0.1:8360" target="_blank" rel="external">http://127.0.0.1:8360</a><br>宿主机里面访问 <a href="http://127.0.0.1:80" target="_blank" rel="external">http://127.0.0.1:80</a>   </p>
-<p>首次打开会进入安装界面，按照提示填写数据库信息和网站管理员信息就行了</p>
-<hr>
-<p>本文出自 “腾飞工作室” 博客，请务必保留此出处：<a href="http://tfgzs.net/2016/08/11/使用docker搭建FireKylin博客系统/">http://tfgzs.net/2016/08/11/使用docker搭建FireKylin博客系统/</a></p>
-
-          
+          <p>简介：FireKylin是一个nodejs的博客系统</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/11/使用docker搭建FireKylin博客系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
