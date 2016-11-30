@@ -38,9 +38,9 @@
 
     
     <entry>
-      <title><![CDATA[JDK环境安装]]></title>
-      <url>%2F2012%2F08%2F23%2FJDK%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%2F</url>
-      <content type="text"><![CDATA[JDK环境配置 , 备忘 打开配置环境变量界面如下操作：我的电脑—属性—高级—环境变量 系统变量（S）中配置如下：新建系统变量： 变量名：JAVA_HOME 变量值：C:\Program Files\Java\jdk1.5.0_17（该目录为JDK安装的目录） 编辑CLASSPATH，如果没有该变量则新建， 变量名：CLASSPATH 变量值：%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;（注：该变量值置于CLASSPATH即可， 其中：变量值最后要记得加“；”） 编辑PATH，如果没有则新建 变量名：PATH 变量值：.;%JAVA_HOME%\bin; （注：该变量值置于PATH前面，如果你只有一个JDK版本，可以不用编辑PATH，如果为了区别版本，那还是配置PATH变量值）。 本文出自 “腾飞工作室” 博客，请务必保留此出处：http://tfgzs.net/2012/08/23/JDK环境安装/]]></content>
+      <title><![CDATA[JDK环境配置]]></title>
+      <url>%2F2012%2F08%2F23%2FJDK%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%2F</url>
+      <content type="text"><![CDATA[JDK环境配置 , 备忘 打开配置环境变量界面如下操作：我的电脑—属性—高级—环境变量 系统变量（S）中配置如下：新建系统变量： 变量名：JAVA_HOME 变量值：C:\Program Files\Java\jdk1.5.0_17（该目录为JDK安装的目录） 编辑CLASSPATH，如果没有该变量则新建， 变量名：CLASSPATH 变量值：%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;（注：该变量值置于CLASSPATH即可， 其中：变量值最后要记得加“；”） 编辑PATH，如果没有则新建 变量名：PATH 变量值：.;%JAVA_HOME%\bin; （注：该变量值置于PATH前面，如果你只有一个JDK版本，可以不用编辑PATH，如果为了区别版本，那还是配置PATH变量值）。 本文出自 “腾飞工作室” 博客，请务必保留此出处：http://tfgzs.net/2012/08/23/JDK环境配置/]]></content>
     </entry>
 
     
