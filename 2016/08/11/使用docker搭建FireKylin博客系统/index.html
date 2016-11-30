@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://tfgzs.net/2016/08/11/使用docker搭建FireKylin博客系统/index.html">
 <meta property="og:site_name" content="腾飞工作室">
 <meta property="og:description" content="简介：FireKylin是一个nodejs的博客系统">
-<meta property="og:updated_time" content="2016-11-30T09:10:36.645Z">
+<meta property="og:updated_time" content="2016-11-30T09:18:13.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用docker搭建FireKylin博客系统">
 <meta name="twitter:description" content="简介：FireKylin是一个nodejs的博客系统">
@@ -390,7 +390,7 @@
       
         <p>简介：FireKylin是一个nodejs的博客系统</p>
 <a id="more"></a>
-<p>1.运行一个空的Ubuntu容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    docker run -it -p 80:8360 --name=web_node_firekylin ubuntu bash</div><div class="line">```  </div><div class="line"></div><div class="line">2.安装nodejs 和 npm</div></pre></td></tr></table></figure></p>
+<h2 id="运行一个空的Ubuntu容器"><a href="#运行一个空的Ubuntu容器" class="headerlink" title="运行一个空的Ubuntu容器"></a>运行一个空的Ubuntu容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    docker run -it -p 80:8360 --name=web_node_firekylin ubuntu bash</div><div class="line">```  </div><div class="line"></div><div class="line">## 安装nodejs 和 npm</div></pre></td></tr></table></figure>
 <pre><code>先更新一下软件仓库列表  
      apt-get update
 安装nodejs和npm
@@ -401,7 +401,7 @@
         nodejs -v
     查看安装的npm版本
             npm -v 
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  为了兼容以前的老版本建议安装这个</div><div class="line">  apt-get install nodejs-legacy</div><div class="line"></div><div class="line">4.下载网站源码文件</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  为了兼容以前的老版本建议安装这个</div><div class="line">  apt-get install nodejs-legacy</div><div class="line"></div><div class="line">## 下载网站源码文件</div></pre></td></tr></table></figure>
 <pre><code>创建一个目录作为我们的站点目录
     cd home &amp;&amp; mkdir myblog &amp;&amp; cd myblog 
 安装wget用于下载文件    
@@ -411,7 +411,7 @@
     tar  -zxvf  firekylin_0.12.6.tar.gz 
 进入解压后的文件夹,安装node依赖
     cd /home/myblog/firekylin &amp;&amp; npm install
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">7.服务器环境推荐pm2启动</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 服务器环境推荐pm2启动</div></pre></td></tr></table></figure>
 <pre><code>安装vim用于修改配置文件  
     apt-get install -y vim-gtk
 安装pm2  
@@ -419,7 +419,7 @@
 将pm2_default.json配置文件的名称修改为pm2.json  
     mv pm2_default.json pm2.json
 修改pm2.json配置，将cwd修改为当前目录  
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">  ![alt](http://www.tfgzs.net/static/upload/201608/1890E7I2lJH5kMSEulLHqxGr.png)   </div><div class="line">8.因为我们的网站运行在docker容器里面需要端口映射，而firekylin默认不让通过ip:端口号的形式访问，所以这里需要解除限制，参考：https://thinkjs.org/zh-cn/doc/2.1/force_proxy.html</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">  ![alt](http://www.tfgzs.net/static/upload/201608/1890E7I2lJH5kMSEulLHqxGr.png)   </div><div class="line">## 端口映射</div><div class="line">因为我们的网站运行在docker容器里面需要端口映射，而firekylin默认不让通过ip:端口号的形式访问，所以这里需要解除限制，参考：https://thinkjs.org/zh-cn/doc/2.1/force_proxy.html</div></pre></td></tr></table></figure>
 <pre><code>在配置文件 src/common/config/hook.js，添加如下的配置：
     export default {
       request_begin: [&quot;prepend&quot;, &quot;force_proxy&quot;]
@@ -428,7 +428,7 @@
     export default {
        host: &quot;0.0.0.0&quot;
     }
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">9，启动项目</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">## 启动项目</div></pre></td></tr></table></figure>
 <pre><code>pm2 start pm2.json
 </code></pre><p>```</p>
 <p>docker容器内部访问 <a href="http://127.0.0.1:8360" target="_blank" rel="external">http://127.0.0.1:8360</a><br>宿主机里面访问 <a href="http://127.0.0.1:80" target="_blank" rel="external">http://127.0.0.1:80</a>   </p>
@@ -553,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -607,6 +616,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行一个空的Ubuntu容器"><span class="nav-number">1.</span> <span class="nav-text">运行一个空的Ubuntu容器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
