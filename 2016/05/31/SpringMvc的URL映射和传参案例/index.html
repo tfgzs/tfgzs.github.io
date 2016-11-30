@@ -1,0 +1,985 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="spring,springmvc,java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Springmvc的基本使用，包括url映射、参数映射、页面跳转、ajax和文件上传
+以前学习的时候写的代码案例，今天整理笔记的时候找到了,发上来当个在线笔记用吧，免的时间长了又忘了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMvc的URL映射和传参案例">
+<meta property="og:url" content="http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/index.html">
+<meta property="og:site_name" content="腾飞工作室">
+<meta property="og:description" content="Springmvc的基本使用，包括url映射、参数映射、页面跳转、ajax和文件上传
+以前学习的时候写的代码案例，今天整理笔记的时候找到了,发上来当个在线笔记用吧，免的时间长了又忘了">
+<meta property="og:updated_time" content="2016-11-30T09:03:11.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMvc的URL映射和传参案例">
+<meta name="twitter:description" content="Springmvc的基本使用，包括url映射、参数映射、页面跳转、ajax和文件上传
+以前学习的时候写的代码案例，今天整理笔记的时候找到了,发上来当个在线笔记用吧，免的时间长了又忘了">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6273250455380297000',
+      author: '腾飞'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/"/>
+
+
+
+
+
+  <title> SpringMvc的URL映射和传参案例 | 腾飞工作室 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f79418d03e6f88dc1973e9104fa7393e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">腾飞工作室</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="tf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="腾飞工作室">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="腾飞工作室" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SpringMvc的URL映射和传参案例
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-31T13:22:00+08:00">
+                2016-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/05/31/SpringMvc的URL映射和传参案例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/SpringMvc的URL映射和传参案例/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/31/SpringMvc的URL映射和传参案例/" class="leancloud_visitors" data-flag-title="SpringMvc的URL映射和传参案例">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Springmvc的基本使用，包括url映射、参数映射、页面跳转、ajax和文件上传</p>
+<p>以前学习的时候写的代码案例，今天整理笔记的时候找到了,发上来当个在线笔记用吧，免的时间长了又忘了</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div></pre></td><td class="code"><pre><div class="line">package sy.controller;</div><div class="line"></div><div class="line">import java.io.File;</div><div class="line">import java.io.FileOutputStream;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.OutputStream;</div><div class="line">import java.io.PrintWriter;</div><div class="line">import java.text.SimpleDateFormat;</div><div class="line">import java.util.Date;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line">import java.util.Random;</div><div class="line">import java.util.UUID;</div><div class="line"></div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line">import org.apache.commons.io.IOUtils;</div><div class="line">import org.springframework.beans.propertyeditors.CustomDateEditor;</div><div class="line">import org.springframework.stereotype.Controller;</div><div class="line">import org.springframework.ui.Model;</div><div class="line">import org.springframework.web.bind.ServletRequestDataBinder;</div><div class="line">import org.springframework.web.bind.annotation.InitBinder;</div><div class="line">import org.springframework.web.bind.annotation.RequestMapping;</div><div class="line">import org.springframework.web.bind.annotation.RequestMethod;</div><div class="line">import org.springframework.web.bind.annotation.RequestParam;</div><div class="line">import org.springframework.web.multipart.MultipartFile;</div><div class="line">import org.springframework.web.multipart.MultipartHttpServletRequest;</div><div class="line">import org.springframework.web.multipart.commons.CommonsMultipartFile;</div><div class="line">import org.springframework.web.servlet.ModelAndView;</div><div class="line"></div><div class="line">import power.FuncConstants;</div><div class="line">import power.Permission;</div><div class="line">import sy.bean.TestPerson;</div><div class="line"></div><div class="line">// 用来标注此类事springMVC管理的控制层的类</div><div class="line">@Controller</div><div class="line">// 为了防止多个控制层类有相同的方法所以要为每个控制层类起个唯一的标示名</div><div class="line">@RequestMapping(value = &quot;/test&quot;)</div><div class="line">// @Scope(&quot;prototype&quot;) ,如果不加这个注释那么该controller就是单列的，一般我们不在controller当中定义成员变量所以不用加这个注释，struts2中的action中会加这个注释就是因为里面经常会定义成员变量，如果不加这个注释当有多个请求的时候就会照成数据共享错误</div><div class="line">public class TestController &#123;</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/hello.do&quot;)</div><div class="line">    // 访问此方法的url路径/test/hello.do</div><div class="line">    public String hello() &#123;</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // ===========================获取页面中传进来的参数=======================================================</div><div class="line">    /**</div><div class="line">     * 方式一：通过request请求方式接收前台页面传过来的参数</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson1.do&quot;)</div><div class="line">    // 访问此方法的url路径为/test/toPerson1.do</div><div class="line">    public String toPerson1(HttpServletRequest request) &#123;</div><div class="line">        String name = request.getParameter(&quot;name&quot;);</div><div class="line">        System.out.println(name);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式二：通过相匹配的参数列表接收页面参数_String,</div><div class="line">     * 而且在页面参数和参数列表中的参数类型相容的情况下是可以自动类型转换的_Integer</div><div class="line">     *  时间类型如果传入的时间格式比较特殊可以通过自定义专门的转换器来解决（属性编辑器）</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson2.do&quot;)</div><div class="line">    // 访问此方法的url路径为/test/toPerson2.do</div><div class="line">    public String toPerson2(String name, Integer age, Date birthday) &#123;</div><div class="line">        System.out.println(&quot;姓名：&quot; + name + &quot;,年龄：&quot; + age + &quot;,生日&quot; + birthday);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 方式2.1 如果你页面传入的和用于接收的非要不一样那么可以用@RequestParam指定</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson21.do&quot;)</div><div class="line">    // 访问此方法的url路径为/test/toPerson21.do</div><div class="line">    public String toPerson21(@RequestParam(&quot;name&quot;) String userName, Integer age, Date birthday) &#123;</div><div class="line">        System.out.println(&quot;姓名：&quot; + userName + &quot;,年龄：&quot; + age + &quot;,生日&quot; + birthday);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 注册时间类型的属性编辑器</div><div class="line">     */</div><div class="line">    @InitBinder</div><div class="line">    public void initBinder(ServletRequestDataBinder binder) &#123;</div><div class="line">        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat(&quot;yyyy-MM-dd&quot;), true));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式三：如果页面传入的参数和接收的实体类（可以为多个实体）中set方法中的参数一致(首字母大小写可以不一致)，</div><div class="line">     * 那么就可以直接给实体类的属性赋值，没有匹配上的将会被赋值为null</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson3.do&quot;)</div><div class="line">    // 访问此方法的url路径为/test/toPerson3.do</div><div class="line">    public String toPerson3(TestPerson p) &#123;</div><div class="line">        System.out.println(p);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式三：如过页面传来两个同名的参数值，方法中可以用一个同名参数数组去接收，而且接收到的参数顺序和传入时的相同。</div><div class="line">     * 如果没有定义成数组传入的参数会以逗号分隔</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson4.do&quot;)</div><div class="line">    // 访问此方法的url路径为/test/toPerson4.do</div><div class="line">    public String toPerson4(String[] name) &#123;</div><div class="line">        for (int i = 0; i &lt; name.length; i++) &#123;</div><div class="line">            System.out.println(name[i]);</div><div class="line">        &#125;</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式四：指定form表单的请求方式，如果不指定，那么post和get都可以访问本方法</div><div class="line">     *  desc：@RequestMapping( method=RequestMethod.POST )可以指定请求方式，前台页面就必须要以它制定好的方式来访问，否则出现405错误</div><div class="line">     */</div><div class="line">    @RequestMapping(value = &quot;/toPerson5.do&quot;, method = RequestMethod.POST)</div><div class="line">    public String toPerson5(TestPerson person) &#123;</div><div class="line">        System.out.println(person);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // ===========================向页面传递参数=======================================================</div><div class="line">    /**</div><div class="line">     * 方式一 desc：方法的返回值采用ModelAndView， new ModelAndView(&quot;index&quot;, map); ，相当于把结果数据放到request里面</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson6.do&quot;)</div><div class="line">    public ModelAndView toPerson6() throws Exception &#123;</div><div class="line">        TestPerson person = new TestPerson();</div><div class="line">        person.setName(&quot;james&quot;);</div><div class="line">        person.setAge(28);</div><div class="line">        person.setAddress(&quot;maami&quot;);</div><div class="line">        SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</div><div class="line">        Date date = format.parse(&quot;1985-04-22&quot;);</div><div class="line">        person.setBirthday(date);</div><div class="line">        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</div><div class="line">        map.put(&quot;p&quot;, person);</div><div class="line">        return new ModelAndView(&quot;index&quot;, map);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式二 desc：直接在方法的参数列表中来定义Map，这个Map即使ModelAndView里面的Map， 由视图解析器统一处理，统一走ModelAndView的接口</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson7.do&quot;)</div><div class="line">    public String toPerson7(Map&lt;String, Object&gt; map) throws Exception &#123;</div><div class="line">        TestPerson person = new TestPerson();</div><div class="line">        person.setName(&quot;james&quot;);</div><div class="line">        person.setAge(28);</div><div class="line">        person.setAddress(&quot;maami&quot;);</div><div class="line">        SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</div><div class="line">        Date date = format.parse(&quot;1985-04-22&quot;);</div><div class="line">        person.setBirthday(date);</div><div class="line">        map.put(&quot;p&quot;, person);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式三 desc：在参数列表中直接定义Model，model.addAttribute(&quot;p&quot;, person);把参数值放到request类里面去，建议使用</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/toPerson8.do&quot;)</div><div class="line">    public String toPerson8(Model model) throws Exception &#123;</div><div class="line">        TestPerson person = new TestPerson();</div><div class="line">        person.setName(&quot;james&quot;);</div><div class="line">        person.setAge(28);</div><div class="line">        person.setAddress(&quot;maami&quot;);</div><div class="line">        SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</div><div class="line">        Date date = format.parse(&quot;1985-04-22&quot;);</div><div class="line">        person.setBirthday(date);</div><div class="line">        // 把参数值放到request类里面去</div><div class="line">        model.addAttribute(&quot;p&quot;, person);</div><div class="line">        return &quot;index&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // ===========================Ajax的使用=======================================================</div><div class="line">    /**</div><div class="line">     * 方式一 ：ajax的请求返回值类型应该是void，参数列表里直接定义HttpServletResponse， 获得PrintWriter的类，最后可把结果写到页面</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/ajax.do&quot;)</div><div class="line">    public void ajax(String name, HttpServletResponse response) &#123;</div><div class="line">        String result = &quot;hello &quot; + name;</div><div class="line">        try &#123;</div><div class="line">            response.getWriter().write(result);</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 方式二 ：直接在参数的列表上定义PrintWriter，out.write(result);把结果写到页面，建议使用的</div><div class="line">     */</div><div class="line">    @RequestMapping(&quot;/ajax1.do&quot;)</div><div class="line">    public void ajax1(String name, PrintWriter out) &#123;</div><div class="line">        String result = &quot;hello &quot; + name;</div><div class="line">        out.write(result);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // ========================跳转 转发和重定向===================================</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/redirectToForm.do&quot;)</div><div class="line">    public String redirectToForm() &#123;</div><div class="line">        //同一个类中 desc：controller内部重定向，redirect:加上同一个controller中的requestMapping的值</div><div class="line">        return &quot;redirect:upload.do&quot;;</div><div class="line">        //不同的类中 desc：controller之间的重定向：必须要指定好controller的命名空间再指定requestMapping的值， redirect：后必须要加/,是从根目录开始</div><div class="line">//        return &quot;redirect:/test/toForm.do&quot;;</div><div class="line">        //同一个类中 desc：controller内部转发，redirect:加上同一个controller中的requestMapping的值</div><div class="line">//        return &quot;forward:toForm.do&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    // ===========================文件上传========================</div><div class="line">    @RequestMapping(&quot;/upload.do&quot;)</div><div class="line">    // 访问此方法的url路径/test/hello.do</div><div class="line">    public String upload() &#123;</div><div class="line">        return &quot;fileUpload&quot;;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 文件上传方式一</div><div class="line">     * @param request</div><div class="line">     * @return</div><div class="line">     * @throws Exception</div><div class="line">     */</div><div class="line">    @RequestMapping(value = &quot;/fileUpload.do&quot;)</div><div class="line">    public String fileUpload(HttpServletRequest request) throws Exception &#123;</div><div class="line">        // 第一步转化request</div><div class="line">        MultipartHttpServletRequest rm = (MultipartHttpServletRequest) request;</div><div class="line">        // 获得原始文件</div><div class="line">        CommonsMultipartFile cfile = (CommonsMultipartFile) rm.getFile(&quot;pic&quot;);</div><div class="line">        // 获得原始文件名</div><div class="line">        String origFileName = cfile.getOriginalFilename();</div><div class="line">        // 获得原始文件的后缀 XXX.jpg</div><div class="line">        String suffix = origFileName.contains(&quot;.&quot;) ? origFileName.substring(origFileName.lastIndexOf(&quot;.&quot;)) : &quot;error&quot;;</div><div class="line">        if (&quot;error&quot;.equalsIgnoreCase(suffix)) &#123;</div><div class="line">            return &quot;error&quot;;</div><div class="line">        &#125;</div><div class="line">        // 获得原始文件的字节数组</div><div class="line">        byte[] bfile = cfile.getBytes();</div><div class="line"></div><div class="line">        // 新文件名=当前时间的毫秒数+3位随机数</div><div class="line">        String fileName = String.valueOf(System.currentTimeMillis());</div><div class="line">        // 获得三位随机数</div><div class="line">        Random random = new Random();</div><div class="line">        for (int i = 0; i &lt; 3; i++) &#123;</div><div class="line">            fileName = fileName + random.nextInt(9);</div><div class="line">        &#125;</div><div class="line">        // 拿到项目的部署路径</div><div class="line">        String path = request.getSession().getServletContext().getRealPath(&quot;/&quot;);</div><div class="line">        // 将用户上传的文件保存到服务器上</div><div class="line">        OutputStream out = new FileOutputStream(new File(path + &quot;/upload/&quot; + fileName + suffix));</div><div class="line">        IOUtils.write(bfile, out);</div><div class="line">        out.close();</div><div class="line">        return &quot;success&quot;;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 文件上传方式二</div><div class="line">     * @param request</div><div class="line">     * @return</div><div class="line">     * @throws Exception</div><div class="line">     */</div><div class="line">    @RequestMapping(value = &quot;/fileUpload2.do&quot;)</div><div class="line">    public String fileUpload2(@RequestParam(value=&quot;pc&quot;,required=false) MultipartFile file,HttpServletRequest request) throws Exception &#123;</div><div class="line">        if(file==null)&#123;</div><div class="line">            MultipartHttpServletRequest rm = (MultipartHttpServletRequest) request;</div><div class="line">            file=rm.getFile(&quot;pic&quot;);</div><div class="line">        &#125;</div><div class="line">        String realPath=request.getSession().getServletContext().getRealPath(&quot;upload&quot;);</div><div class="line">        File destFile=new File(realPath+&quot;/&quot;+UUID.randomUUID().toString()+file.getName());</div><div class="line">        file.transferTo(destFile);//将上传上来的临时文件移到到我们的目标目录，File类型的也有类似的renameTo方法移动文件</div><div class="line">        return &quot;success&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>本文出自 “腾飞工作室” 博客，请务必保留此出处：<a href="http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/">http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+            <a href="/tags/springmvc/" rel="tag"># springmvc</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/01/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/11/使用docker搭建FireKylin博客系统/" rel="prev" title="使用docker搭建FireKylin博客系统">
+                使用docker搭建FireKylin博客系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/31/SpringMvc的URL映射和传参案例/"
+     data-title="SpringMvc的URL映射和传参案例"
+     data-content=""
+     data-url="http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/31/SpringMvc的URL映射和传参案例/"
+           data-title="SpringMvc的URL映射和传参案例" data-url="http://tfgzs.net/2016/05/31/SpringMvc的URL映射和传参案例/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="tf" />
+          <p class="site-author-name" itemprop="name">tf</p>
+          <p class="site-description motion-element" itemprop="description">业务成就技术，事业成就人生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tfgzs2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("oDjGYWDTafxrQGN2nrI4ipv3-gzGzoHsz", "swfOCHUKu7ykylS6ofRaYTDO");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
