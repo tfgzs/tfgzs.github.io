@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[Visual Studio Code常用快捷键]]></title>
+      <url>%2F2016%2F12%2F02%2FVisual-Studio-Code%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
+      <content type="text"><![CDATA[Visual Studio Code常用快捷键官方文档：https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf 快速将当前文件夹在 vscode 中打开当前文件夹下按住shift键再点击鼠标右键，可以看到“在此处打开命令窗口(W)”,点击此选项然后输入 code . 即可打开 控制视图窗口 ctrl+shift+n 新建窗口 Ctrl+Shift+w 关闭窗口 Ctrl+N 新建文件 ctrl+b 切换侧边栏 ctrl+\ 拆分编辑器 搜索 Ctrl+P 本地文件搜索，默认列出了你打开过的文件 Ctrl+F 当前打开的文件内搜索代码 Ctrl+H 当前打开的文件内搜索和替换 Ctrl+Shift+F 在整个项目中搜索代码出现的位置 F12 跳转到代码定义处 Alt+F12 显示代码定义处的缩略图但是不跳转过去 shift+F12 列出所有的引用 编辑 Alt+左右箭头 回到前后几次编辑的地方 Alt+上下箭头 上下移动选中的代码 Alt+Shift+上下箭头 上下复制当前选中行 本文出自 “腾飞工作室” 博客，请务必保留此出处：http://tfgzs.net/2016/12/02/Visual-Studio-Code常用快捷键/]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Windows使用shadowsocks和Proxifier实现为电脑上任何一个程序代理]]></title>
       <url>%2F2016%2F08%2F29%2FWindows%E4%BD%BF%E7%94%A8shadowsocks%E5%92%8CProxifier%E5%AE%9E%E7%8E%B0%E4%B8%BA%E7%94%B5%E8%84%91%E4%B8%8A%E4%BB%BB%E4%BD%95%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%90%86%2F</url>
       <content type="text"><![CDATA[shadowsocks、Proxifier，window下翻墙黄金搭档 查看我们的shadowsocks的端口 配置proxifier 检查是否可用 给我们的代理起个名字 然后一路点“确定“ ，遇到下面这个图，直接点”是“即可 测试一下 可以发现当我们使用其他的软件访问网络的时候都被代理了到目前为止我们的代理是对全局起作用的，电脑上任何一个应用程序要联网都会经过这个代理，下面我们来看如何为指定的某个程序代理 设置代理规则菜单：配置文件——&gt;代理规则我们来看一下最终的配置以及所代表的含义 另外一种临时生效代理规则通过对想代理的软件点击右键选择想使用的代理即可 你有可能遇到的问题在第7步的时候，你通过代理规则里面的浏览按钮选择想要代理的软件可能不一定会生效，这时你可以通过“任务管理器”找到该应用程序的进程名字，然后手动添加到代理规则的应用程序里面，多个应该程序之间使用英文分号分隔，如下图 本文出自 “腾飞工作室” 博客，请务必保留此出处：http://tfgzs.net/2016/08/29/Windows使用shadowsocks和Proxifier实现为电脑上任何一个程序代理/]]></content>
