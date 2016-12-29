@@ -98,7 +98,7 @@ ubuntu Raring 13.04 and Saucy 13.10 (64 bit)">
 ubuntu Trusty 14.04 (LTS) (64 bit)
 ubuntu Precise 12.04 (64 bit)
 ubuntu Raring 13.04 and Saucy 13.10 (64 bit)">
-<meta property="og:updated_time" content="2016-12-29T06:40:41.125Z">
+<meta property="og:updated_time" content="2016-12-29T07:00:12.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="01 Ubuntu系统中安装Docker">
 <meta name="twitter:description" content="docker支持的Ubuntu版本
@@ -415,29 +415,25 @@ ubuntu Raring 13.04 and Saucy 13.10 (64 bit)">
 </ul>
 <h3 id="安装版本的选择："><a href="#安装版本的选择：" class="headerlink" title="安装版本的选择："></a>安装版本的选择：</h3><ul>
 <li><p>方案一：安装Ubuntu维护的docker</p>
-<pre><code>1.$ apt-get install docker.io                              //作用：安装docker
-2.$ source /etc/bash_completion.d/docker.io               //作用：更新配置
-3.$ docker.io version                                    //作用：查看安装的docker的版本
+<pre><code>1. $ apt-get install docker.io                           //作用：安装docker
+2. $ source /etc/bash_completion.d/docker.io             //作用：更新配置
+3. $ docker.io version                                   //作用：查看安装的docker的版本
 </code></pre></li>
-<li><p>方案二：安装Docker公司维护的docker <code>推荐</code><br>  1、安装Ubuntu维护的docker</p>
-<pre><code>1.$ apt-get install docker.io                              //作用：安装docker
-2.$ source /etc/bash_completion.d/docker.io                //作用：更新配置
-3.$ docker.io version                                      //作用：查看安装的docker的版本
-</code></pre><p>  2、安装Docker公司维护的docker(推荐)</p>
-<pre><code>  1.$ whereis curl                                             //作用：检查curl文件是否已经安装
-      如果提示 curl:     就说明没有安装，需要执行下面这俩命令
-          $ apt-get update                             //作用：更新软件仓库列表（比如：在windows中使用360升级软件，需要保证360软件库中软件版本列表是最新的，这个是相同的效果更新apt
+<li><p>方案二：安装Docker公司维护的docker <code>推荐</code></p>
+<pre><code>1. $ whereis curl                                             //作用：检查curl文件是否已经安装
+      如果提示 curl: 就说明没有安装，需要执行下面这俩命令
+          $ apt-get update                           //作用：更新软件仓库列表（比如：在windows中使用360升级软件，需要保证360软件库中软件版本列表是最新的，这个是相同的效果更新apt
           $ sudo apt-get install -y curl             //作用:下载文件的工具（参数-y是同意的意思。没有 -y的命令也可以执行，系统会提示你是否安装，输入y，回车;加上-y参数则跳过系统提示，直接安装）
-2.$ curl -sSL https://get.docker.com/ | sh        //使用curl工具下载docker公司提供的快速安装脚本文件，并执行这个脚本文件，即刻快速完成安装
-3.$ docker version                              //作用：检查安装的docker的版本
-</code></pre><p>3、将当前用户添加到docker用户组避免每次执行docker命令都需要前面加sudo</p>
-<pre><code>1.$ sudo groupadd docker                         //作用：创建一个用户组名叫“docker”
-2.$ sudo gpasswd -a 你的用户名 docker        //作用：讲当前用户添加到docker用户组
-3.$ sudo service docker restart                 //重新启动docker服务
-4.注销之后重新登录一下系统
+2. $ curl -sSL https://get.docker.com/ | sh      //使用curl工具下载docker公司提供的快速安装脚本文件，并执行这个脚本文件，即刻快速完成安装
+3. $ docker version                              //作用：检查安装的docker的版本
 </code></pre></li>
 </ul>
-<hr>
+<h3 id="安全管理"><a href="#安全管理" class="headerlink" title="安全管理"></a>安全管理</h3><pre><code>将当前用户添加到docker用户组避免每次执行docker命令都需要前面加sudo
+ 1. $ sudo groupadd docker                         //作用：创建一个用户组名叫“docker”
+ 2. $ sudo gpasswd -a 你的用户名 docker             //作用：讲当前用户添加到docker用户组
+ 3. $ sudo service docker restart                  //重新启动docker服务
+ 4. 注销之后重新登录一下系统
+</code></pre><hr>
 <p>本文出自 “腾飞工作室” 博客，请务必保留此出处：<a href="http://tfgzs.net/2016/04/09/01">http://tfgzs.net/2016/04/09/01</a> Ubuntu系统中安装Docker/</p>
 
       
@@ -626,7 +622,7 @@ ubuntu Raring 13.04 and Saucy 13.10 (64 bit)">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装前检查"><span class="nav-number">1.</span> <span class="nav-text">安装前检查:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装版本的选择："><span class="nav-number">2.</span> <span class="nav-text">安装版本的选择：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装前检查"><span class="nav-number">1.</span> <span class="nav-text">安装前检查:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装版本的选择："><span class="nav-number">2.</span> <span class="nav-text">安装版本的选择：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全管理"><span class="nav-number">3.</span> <span class="nav-text">安全管理</span></a></li></ol></div>
             
 
           </div>
