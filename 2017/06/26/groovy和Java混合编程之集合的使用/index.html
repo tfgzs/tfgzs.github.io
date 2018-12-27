@@ -1,0 +1,1141 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,groovy,集合," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="groovy 简化了 Java 语法，并且增加了一些集合的常用操作Java8 中也提供了 stream 以满足复杂的集合操作需求日常集合操作代码案例这里都有">
+<meta name="keywords" content="java,groovy,集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="groovy和Java混合编程之集合的使用">
+<meta property="og:url" content="http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/index.html">
+<meta property="og:site_name" content="腾飞工作室">
+<meta property="og:description" content="groovy 简化了 Java 语法，并且增加了一些集合的常用操作Java8 中也提供了 stream 以满足复杂的集合操作需求日常集合操作代码案例这里都有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-15T01:52:55.319Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="groovy和Java混合编程之集合的使用">
+<meta name="twitter:description" content="groovy 简化了 Java 语法，并且增加了一些集合的常用操作Java8 中也提供了 stream 以满足复杂的集合操作需求日常集合操作代码案例这里都有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6273250455380297000',
+      author: '腾飞'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/"/>
+
+
+
+
+
+  <title> groovy和Java混合编程之集合的使用 | 腾飞工作室 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f79418d03e6f88dc1973e9104fa7393e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">腾飞工作室</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="tf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="腾飞工作室">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="腾飞工作室" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                groovy和Java混合编程之集合的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-26T11:26:23+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/06/26/groovy和Java混合编程之集合的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/26/groovy和Java混合编程之集合的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/26/groovy和Java混合编程之集合的使用/" class="leancloud_visitors" data-flag-title="groovy和Java混合编程之集合的使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>groovy 简化了 Java 语法，并且增加了一些集合的常用操作<br>Java8 中也提供了 stream 以满足复杂的集合操作需求<br>日常集合操作代码案例这里都有</p>
+<a id="more"></a>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String[] contents = &#123; &quot;tom&quot;, &quot;jerry&quot;, &quot;bill&quot;&#125;;</div></pre></td></tr></table></figure>
+<h3 id="创建list"><a href="#创建list" class="headerlink" title="创建list"></a>创建list</h3><ul>
+<li>java 语法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">List&lt;User&gt; list = new ArrayList&lt;User&gt;()&#123;&#123;</div><div class="line">    add(new User(&quot;tom&quot;,18));</div><div class="line">    add(new User(&quot;bill&quot;,14));</div><div class="line">    add(new User(&quot;jerry&quot;,16));</div><div class="line">&#125;&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>groovy 语法</li>
+</ul>
+<h3 id="集合与数组的转换"><a href="#集合与数组的转换" class="headerlink" title="集合与数组的转换"></a>集合与数组的转换</h3><h3 id="创建map"><a href="#创建map" class="headerlink" title="创建map"></a>创建map</h3><p>###</p>
+<ul>
+<li><p>java 语法</p>
+</li>
+<li><p>groovy 语法</p>
+<pre><code>def map=[:]   //空的map
+def map=[&quot;a&quot;:1 ,&quot;b&quot;:2]
+</code></pre></li>
+</ul>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><h3 id="Java-遍历-list"><a href="#Java-遍历-list" class="headerlink" title="Java 遍历 list"></a>Java 遍历 list</h3><h3 id="groovy-遍历-list"><a href="#groovy-遍历-list" class="headerlink" title="groovy 遍历 list"></a>groovy 遍历 list</h3><h3 id="Java-遍历-map"><a href="#Java-遍历-map" class="headerlink" title="Java 遍历 map"></a>Java 遍历 map</h3><ul>
+<li><p>方法一</p>
+<pre><code>def map = [&quot;a&quot;: 1, &quot;b&quot;: 2]
+for (Map.Entry&lt;String,Integer&gt; entry : map) {
+    println entry.key+&quot;---&quot;+entry.value
+}
+</code></pre></li>
+<li><p>方法二</p>
+<pre><code>只对 key 遍历
+for (String key : map.keySet()) {
+    System.out.println(key + &quot; = &quot; + map.get(key));
+}
+
+只对 value 遍历
+for (String value : map.values()) {
+    System.out.println(&quot;value = &quot; + value);
+}
+</code></pre></li>
+<li><p>方法三</p>
+<pre><code>Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; entries = map.entrySet().iterator();
+while (entries.hasNext()) {
+    Map.Entry&lt;String, Integer&gt; entry = entries.next();
+    System.out.println(entry.key + &quot; = &quot; + entry.value);
+}
+</code></pre></li>
+<li><p>方法四</p>
+<pre><code>考虑实际场景如果你的value类型比较复杂你最好带着泛型
+map.forEach((String k,Integer v)-&gt;{
+    System.out.println(k+&quot; = &quot;+v);
+});
+
+如果比较简单当然你可以把泛型去掉
+map.forEach((k,v)-&gt;{
+    System.out.println(k+&quot; = &quot;+v);
+});
+
+如果仅仅是输出你还可以更简单
+map.forEach((k,v)-&gt; System.out.println(k+&quot; = &quot;+v));
+</code></pre></li>
+</ul>
+<h3 id="groovy-遍历-map"><a href="#groovy-遍历-map" class="headerlink" title="groovy 遍历 map"></a>groovy 遍历 map</h3><ul>
+<li><p>方法一</p>
+<pre><code>map.each { k, v -&gt;
+    println k + &quot;---&quot; + v
+}
+</code></pre></li>
+<li><p>方法二：可以获取下标</p>
+<pre><code>map.eachWithIndex { Map.Entry&lt;String, Integer&gt; entry, int i -&gt;
+    println entry.key + &quot; = &quot; + entry.value+ &quot;---&quot;+i
+}
+</code></pre></li>
+</ul>
+<h2 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h2><p>去重</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">List&lt;User&gt; list = [</div><div class="line">           new User(name: &quot;tom&quot;, age: 18),</div><div class="line">           new User(name: &quot;bill&quot;, age: 18),</div><div class="line">           new User(name: &quot;jerry&quot;, age: 16),</div><div class="line">           new User(name: &quot;judy&quot;, age: 36)</div><div class="line">   ]</div><div class="line"></div><div class="line">//Java对集合的排序</div><div class="line">Collections.sort(list,new Comparator&lt;User&gt;() &#123;</div><div class="line">      //原则：</div><div class="line">	// x 中所有大于 y 的都返回正数，正序排列</div><div class="line">	// x 中所有小于 y 的都返回负数，倒序排列</div><div class="line">	// x 中所有等于 y 的都返回0，不排序</div><div class="line">       @Override</div><div class="line">       int compare(User x, User y) &#123;</div><div class="line"></div><div class="line">		  //正序排列</div><div class="line">           return x.age.compareTo(y.age)</div><div class="line">           return x.age-y.age</div><div class="line">           </div><div class="line">           //降序</div><div class="line">           return y.age.compareTo(x.age)</div><div class="line">           return y.age-x.age</div><div class="line">       &#125;</div><div class="line">   &#125;)</div><div class="line">   prinln &quot;集合排序：&quot;+list</div><div class="line">   </div><div class="line">   //Java 对数组排序</div><div class="line">User[] userArray =[</div><div class="line">           new User(name: &quot;tom&quot;, age: 18),</div><div class="line">           new User(name: &quot;bill&quot;, age: 18),</div><div class="line">           new User(name: &quot;jerry&quot;, age: 16),</div><div class="line">           new User(name: &quot;judy&quot;, age: 36)</div><div class="line">   ]</div><div class="line">Arrays.sort(userArray, new Comparator&lt;User&gt;() &#123;</div><div class="line">    @Override</div><div class="line">    int compare(User o1, User o2) &#123;</div><div class="line">        //正序</div><div class="line">        return o1.age.compareTo(o2.age)</div><div class="line">        //倒序</div><div class="line">        return o2.age.compareTo(o1.age)</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">println &quot;数组排序：&quot;+userArray</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">//Java8中可以使用 lambda 表达式来写</div><div class="line">//升序</div><div class="line">list.sort((o1, o2) -&gt; o1.getAge().compareTo(o2.getAge())); //方法1</div><div class="line">list.sort(Comparator.comparing(User::getAge));//方法2</div><div class="line">Collections.sort(list, Comparator.comparing(User::getAge));//方法3</div><div class="line">//倒序</div><div class="line">list.sort((o1, o2) -&gt; o2.getAge().compareTo(o1.getAge()));//方法1</div><div class="line">list.sort(Comparator.comparing(User::getAge).reversed());//方法2</div><div class="line">Collections.sort(list, Comparator.comparing(User::getAge).reversed());//方法3</div><div class="line">      </div><div class="line">   </div><div class="line">   //groovy 的闭包对集合和数组的排序可以如下简写</div><div class="line">list.sort &#123; x, y -&gt;</div><div class="line">	 //正序</div><div class="line">	return x.age.compareTo(y.age)</div><div class="line">	return x.age-y.age</div><div class="line">	return x.age &lt;=&gt; y.age</div><div class="line">    //倒序</div><div class="line">	return y.age.compareTo(x.age)</div><div class="line">	return y.age-x.age</div><div class="line">	return y.age &lt;=&gt; x.age</div><div class="line">&#125;</div><div class="line">prinln &quot;排序后：&quot;+list</div><div class="line"></div><div class="line"></div><div class="line">//groovy 打乱一个集合或者数组</div><div class="line">Integer[] arr = [2, 4, 6, 1, 0]</div><div class="line">def arr2 = arr.sort&#123;</div><div class="line">    Math.random()</div><div class="line">&#125;</div><div class="line">println arr2</div></pre></td></tr></table></figure>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><h3 id="多个-list-合并成一个"><a href="#多个-list-合并成一个" class="headerlink" title="多个 list 合并成一个"></a>多个 list 合并成一个</h3><pre><code>List&lt;List&lt;Integer&gt;&gt; list = [[1], [11,12], [21,22,23], [31,32,33], [41,42,43,44]]
+List&lt;Integer&gt; result = list.stream()
+                        .flatMap({ it.stream().map({it}) })
+                        .collect(Collectors.toList());
+
+或者
+ List&lt;Integer&gt; result = list.stream()
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
+
+println list
+
+输出结果：[1, 11, 12, 21, 22, 23, 31, 32, 33, 41, 42, 43, 44]
+</code></pre><p>–</p>
+<pre><code>复杂的场景：多个异步执行结果的返回值合并到一起
+
+CompletableFuture future1=CompletableFuture.supplyAsync({
+    TimeUnit.SECONDS.sleep(1) //延迟一秒返回
+    return [1,2,3]
+});
+CompletableFuture future2=CompletableFuture.supplyAsync({
+    TimeUnit.SECONDS.sleep(5) //延迟五秒返回
+    return [4,5,6,7,8,9]
+});
+
+List&lt;Integer&gt; collect= Stream.of(future1,future2)
+        .flatMap({(it.join() as List&lt;Integer&gt;).stream().map({it}) })
+        .collect(Collectors.toList());
+println collect
+
+五秒钟后输出结果：[1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre><h3 id="多个map的结果合并到一起"><a href="#多个map的结果合并到一起" class="headerlink" title="多个map的结果合并到一起"></a>多个map的结果合并到一起</h3><h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2><h3 id="list-转-map"><a href="#list-转-map" class="headerlink" title="list 转 map"></a>list 转 map</h3><h4 id="一个list：提取一个属性作为key，其他的值作为value"><a href="#一个list：提取一个属性作为key，其他的值作为value" class="headerlink" title="一个list：提取一个属性作为key，其他的值作为value"></a>一个list：提取一个属性作为key，其他的值作为value</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	Integer salary</div><div class="line">	String emailId</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person person1=new Person(salary:25000,emailId:&quot;anamika@gmail.com&quot;)</div><div class="line">Person person2=new Person(salary:23000,emailId:&quot;sanjana@gmail.com&quot;)</div><div class="line">Person person3=new Person(salary:26000,emailId:&quot;khalid@gmail.com&quot;)</div><div class="line">Person person4=new Person(salary:20000,emailId:&quot;anjali@gmail.com&quot;)</div><div class="line">Person person5=new Person(salary:22000,emailId:&quot;aditya@gmail.com&quot;)</div><div class="line">List&lt;Person&gt; persons=[person1,person2,person3,person4,person5]</div><div class="line"></div><div class="line">//方法一</div><div class="line">Map&lt;String,Integer&gt; result = persons.collectEntries&#123;</div><div class="line">[it.emailId,it.salary]</div><div class="line">&#125;</div><div class="line"></div><div class="line">//方法二</div><div class="line">Map&lt;String,Integer&gt; result = persons.collectEntries&#123;</div><div class="line">[(it.emailId):it.salary]</div><div class="line">&#125;</div><div class="line">//输出结果</div><div class="line">Output of result -&gt; [anamika@gmail.com:25000, sanjana@gmail.com:23000, khalid@gmail.com:26000, anjali@gmail.com:20000, aditya@gmail.com:22000]</div></pre></td></tr></table></figure>
+<p>java8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">	List&lt;PhotoExcel&gt; list = [</div><div class="line">            new PhotoExcel(bucket: &quot;a&quot;, dir: &quot;a/a&quot;),</div><div class="line">            new PhotoExcel(bucket: &quot;a&quot;, dir: &quot;a/b&quot;),</div><div class="line">            new PhotoExcel(bucket: &quot;b&quot;, dir: &quot;b/b&quot;),</div><div class="line">            new PhotoExcel(bucket: &quot;b&quot;, dir: &quot;b/b&quot;),</div><div class="line">    ]</div><div class="line"></div><div class="line">    def map = list.stream().collect(</div><div class="line">            Collectors.groupingBy(new Function&lt;PhotoExcel, String&gt;() &#123;</div><div class="line">                @Override</div><div class="line">                String apply(PhotoExcel photoExcel) &#123;</div><div class="line">                    return photoExcel.bucket</div><div class="line">                &#125;</div><div class="line">            &#125;, Collectors.mapping(Function.identity(), Collectors.toList())))</div><div class="line"></div><div class="line">    println JSON.toJSONString(map)</div><div class="line">    </div><div class="line">//输出：&#123;&quot;a&quot;:[&#123;&quot;bucket&quot;:&quot;a&quot;,&quot;dir&quot;:&quot;a/a&quot;&#125;,&#123;&quot;bucket&quot;:&quot;a&quot;,&quot;dir&quot;:&quot;a/b&quot;&#125;],&quot;b&quot;:[&#123;&quot;bucket&quot;:&quot;b&quot;,&quot;dir&quot;:&quot;b/b&quot;&#125;,&#123;&quot;bucket&quot;:&quot;b&quot;,&quot;dir&quot;:&quot;b/b&quot;&#125;]&#125;</div></pre></td></tr></table></figure>
+<h4 id="两个长度相同的list：一个list作为key，另外一个list对应的下标值作为value"><a href="#两个长度相同的list：一个list作为key，另外一个list对应的下标值作为value" class="headerlink" title="两个长度相同的list：一个list作为key，另外一个list对应的下标值作为value"></a>两个长度相同的list：一个list作为key，另外一个list对应的下标值作为value</h4><pre><code>setUp:   
+    String[]  arr1 = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]
+    Integer[] arr2 = [4, 5, 6]
+想要的结果：[a:4, b:5, c:6]
+
+方法1：最常规的做法在遍历一个集合的同时通过下标获取另一个
+     Map&lt;String,Integer&gt; result=[:]
+    arr1.eachWithIndex { String entry, int i -&gt;
+        result.put(entry,arr2[i])
+    }
+
+方法2： 先转换为二维数组再把二维数组转换为map，感觉比较玩的花哨
+    def result = [arr1, arr2].transpose()  //先转换为：[[&quot;a&quot;,4],[&quot;b&quot;,5],[&quot;c&quot;,6]]
+             .inject([:]) { entry, it -&gt;entry + [(it[0]):(it[1])]}
+
+
+方法3：和方法2思想一样，只是混合 Java8 的语法
+    def result = [arr1, arr2].transpose()
+            .stream().collect(Collectors.toMap({it[0]},{it[1]}))
+</code></pre><h3 id="map-转-list"><a href="#map-转-list" class="headerlink" title="map 转 list"></a>map 转 list</h3><h3 id="转换内容格式"><a href="#转换内容格式" class="headerlink" title="转换内容格式"></a>转换内容格式</h3><pre><code>def a=[1,2,3].stream().map({it+&quot;转成字符串格式&quot;}).collect(Collectors.toList())
+def b=[1,2,3].collect({ it+&quot;转成字符串格式&quot; })
+println a
+println b
+</code></pre><h2 id="合并-1"><a href="#合并-1" class="headerlink" title="合并"></a>合并</h2><h3 id="map合并"><a href="#map合并" class="headerlink" title="map合并"></a>map合并</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Map a=[&quot;a&quot;:1]</div><div class="line">Map b=[&quot;b&quot;:2]</div><div class="line">Map c=[&quot;a&quot;:3]  //相同的 key 后面的会把前面的覆盖</div><div class="line"></div><div class="line">a.putAll(b)</div><div class="line">a.putAll(c)</div><div class="line"></div><div class="line">println a</div></pre></td></tr></table></figure>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>java8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int pageSize=20; //每页多少条</div><div class="line">List&lt;GoodsDTO&gt; goodsList =new ArrayList&lt;&gt;();  //要分页的数据         </div><div class="line">int page = (goodsList.size() + (pageSize - 1)) / pageSize; //分页    </div><div class="line">List&lt;List&lt;GoodsDTO&gt;&gt; goodsListPage = Stream.iterate(0, n -&gt; n + 1)</div><div class="line">    .limit(page)</div><div class="line">    .parallel()</div><div class="line">    .map(currPage -&gt;</div><div class="line">            goodsList.stream()</div><div class="line">                    .skip(currPage * pageSize)</div><div class="line">                    .limit(pageSize)</div><div class="line">                    .collect(Collectors.toList())</div><div class="line">    ).collect(Collectors.toList());</div></pre></td></tr></table></figure>
+<p>guava</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int pageSize=20; //每页多少条</div><div class="line">List&lt;GoodsDTO&gt; goodsList =new ArrayList&lt;&gt;();  //要分页的数据         </div><div class="line">List&lt;List&lt;GoodsDTO&gt;&gt; lists = Lists.partition(goodsList, pageSize);</div></pre></td></tr></table></figure>
+<hr>
+<p>本文出自 “腾飞工作室” 博客，请务必保留此出处：<a href="http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/">http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/groovy/" rel="tag"># groovy</a>
+          
+            <a href="/tags/集合/" rel="tag"># 集合</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/08/git提交代码时配置多个远程库地址/" rel="next" title="git提交代码时配置多个远程库地址">
+                <i class="fa fa-chevron-left"></i> git提交代码时配置多个远程库地址
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/26/Java后端JSON解析全解/" rel="prev" title="Java后端JSON解析全解">
+                Java后端JSON解析全解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/06/26/groovy和Java混合编程之集合的使用/"
+     data-title="groovy和Java混合编程之集合的使用"
+     data-content=""
+     data-url="http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/26/groovy和Java混合编程之集合的使用/"
+           data-title="groovy和Java混合编程之集合的使用" data-url="http://tfgzs.net/2017/06/26/groovy和Java混合编程之集合的使用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="tf" />
+          <p class="site-author-name" itemprop="name">tf</p>
+          <p class="site-description motion-element" itemprop="description">业务成就技术，事业成就人生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">1.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数组"><span class="nav-number">1.1.</span> <span class="nav-text">创建数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建list"><span class="nav-number">1.2.</span> <span class="nav-text">创建list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合与数组的转换"><span class="nav-number">1.3.</span> <span class="nav-text">集合与数组的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建map"><span class="nav-number">1.4.</span> <span class="nav-text">创建map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">2.</span> <span class="nav-text">遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-遍历-list"><span class="nav-number">2.1.</span> <span class="nav-text">Java 遍历 list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groovy-遍历-list"><span class="nav-number">2.2.</span> <span class="nav-text">groovy 遍历 list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-遍历-map"><span class="nav-number">2.3.</span> <span class="nav-text">Java 遍历 map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groovy-遍历-map"><span class="nav-number">2.4.</span> <span class="nav-text">groovy 遍历 map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#筛选"><span class="nav-number">3.</span> <span class="nav-text">筛选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">4.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组"><span class="nav-number">5.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并"><span class="nav-number">6.</span> <span class="nav-text">合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多个-list-合并成一个"><span class="nav-number">6.1.</span> <span class="nav-text">多个 list 合并成一个</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个map的结果合并到一起"><span class="nav-number">6.2.</span> <span class="nav-text">多个map的结果合并到一起</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">7.</span> <span class="nav-text">转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list-转-map"><span class="nav-number">7.1.</span> <span class="nav-text">list 转 map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个list：提取一个属性作为key，其他的值作为value"><span class="nav-number">7.1.1.</span> <span class="nav-text">一个list：提取一个属性作为key，其他的值作为value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个长度相同的list：一个list作为key，另外一个list对应的下标值作为value"><span class="nav-number">7.1.2.</span> <span class="nav-text">两个长度相同的list：一个list作为key，另外一个list对应的下标值作为value</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-转-list"><span class="nav-number">7.2.</span> <span class="nav-text">map 转 list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换内容格式"><span class="nav-number">7.3.</span> <span class="nav-text">转换内容格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并-1"><span class="nav-number">8.</span> <span class="nav-text">合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map合并"><span class="nav-number">8.1.</span> <span class="nav-text">map合并</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">9.</span> <span class="nav-text">分页</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tfgzs2016"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("oDjGYWDTafxrQGN2nrI4ipv3-gzGzoHsz", "swfOCHUKu7ykylS6ofRaYTDO");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
