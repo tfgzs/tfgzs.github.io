@@ -704,7 +704,7 @@
 
       
         
-          <p>对 Java NIO 的理解<br>
+          <p>对 Java NIO 的理解</p>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/11/16/Java的NIO/#more" rel="contents">
@@ -1169,13 +1169,14 @@
 
       
         
-          
-            <p>当你使用Spring的时候是否感觉他帮助了又限制了你？</p>
-<h2 id="抽象类里面如何注入"><a href="#抽象类里面如何注入" class="headerlink" title="抽象类里面如何注入"></a>抽象类里面如何注入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//子类受到Spring管理，子类继承抽象类</div><div class="line">@Component</div><div class="line">class DemoFacade extends AbstractDemoFacade &#123;</div><div class="line">    @Autowired</div><div class="line">    Prop prop</div><div class="line"></div><div class="line">	public Prop getProp() &#123;</div><div class="line">        return apiDocSetting</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line">//抽象类</div><div class="line">abstract class AbstractDemoFacade &#123;</div><div class="line">	//加上一个抽象的getter方法让子类去实现即可获取子类注入的属性</div><div class="line">    abstract Prop getProp()</div><div class="line"></div><div class="line">	protected String mehtod1()&#123;</div><div class="line">		getProp().xxx  //读取子类注入属性中的值</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<p>本文出自 “腾飞工作室” 博客，请务必保留此出处：<a href="http://tfgzs.net/2017/07/08/当设计模式遇到Spring/">http://tfgzs.net/2017/07/08/当设计模式遇到Spring/</a></p>
-
-          
+          <p>当你使用 Spring 的时候是否感觉他帮助了又限制了你？</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/08/当设计模式遇到Spring/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

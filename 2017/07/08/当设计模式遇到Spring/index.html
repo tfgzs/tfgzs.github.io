@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="当你使用Spring的时候是否感觉他帮助了又限制了你？ 抽象类里面如何注入1234567891011121314151617181920//子类受到Spring管理，子类继承抽象类@Componentclass DemoFacade extends AbstractDemoFacade &amp;#123;    @Autowired    Prop prop	public Prop getProp()">
+<meta name="description" content="当你使用 Spring 的时候是否感觉他帮助了又限制了你？">
 <meta name="keywords" content="设计模式,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="当设计模式遇到Spring">
 <meta property="og:url" content="http://tfgzs.net/2017/07/08/当设计模式遇到Spring/index.html">
 <meta property="og:site_name" content="腾飞工作室">
-<meta property="og:description" content="当你使用Spring的时候是否感觉他帮助了又限制了你？ 抽象类里面如何注入1234567891011121314151617181920//子类受到Spring管理，子类继承抽象类@Componentclass DemoFacade extends AbstractDemoFacade &amp;#123;    @Autowired    Prop prop	public Prop getProp()">
+<meta property="og:description" content="当你使用 Spring 的时候是否感觉他帮助了又限制了你？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-08T08:40:15.000Z">
+<meta property="og:updated_time" content="2018-12-27T05:25:56.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="当设计模式遇到Spring">
-<meta name="twitter:description" content="当你使用Spring的时候是否感觉他帮助了又限制了你？ 抽象类里面如何注入1234567891011121314151617181920//子类受到Spring管理，子类继承抽象类@Componentclass DemoFacade extends AbstractDemoFacade &amp;#123;    @Autowired    Prop prop	public Prop getProp()">
+<meta name="twitter:description" content="当你使用 Spring 的时候是否感觉他帮助了又限制了你？">
 
 
 
@@ -390,7 +390,8 @@
       
 
       
-        <p>当你使用Spring的时候是否感觉他帮助了又限制了你？</p>
+        <p>当你使用 Spring 的时候是否感觉他帮助了又限制了你？</p>
+<a id="more"></a>
 <h2 id="抽象类里面如何注入"><a href="#抽象类里面如何注入" class="headerlink" title="抽象类里面如何注入"></a>抽象类里面如何注入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//子类受到Spring管理，子类继承抽象类</div><div class="line">@Component</div><div class="line">class DemoFacade extends AbstractDemoFacade &#123;</div><div class="line">    @Autowired</div><div class="line">    Prop prop</div><div class="line"></div><div class="line">	public Prop getProp() &#123;</div><div class="line">        return apiDocSetting</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line">//抽象类</div><div class="line">abstract class AbstractDemoFacade &#123;</div><div class="line">	//加上一个抽象的getter方法让子类去实现即可获取子类注入的属性</div><div class="line">    abstract Prop getProp()</div><div class="line"></div><div class="line">	protected String mehtod1()&#123;</div><div class="line">		getProp().xxx  //读取子类注入属性中的值</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
 <p>本文出自 “腾飞工作室” 博客，请务必保留此出处：<a href="http://tfgzs.net/2017/07/08/当设计模式遇到Spring/">http://tfgzs.net/2017/07/08/当设计模式遇到Spring/</a></p>
